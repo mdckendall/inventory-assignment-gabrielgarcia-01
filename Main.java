@@ -26,24 +26,31 @@ class Main {
       if (userInput == 1) { // Add item
         System.out.println("Enter the name:");
         name = input.nextLine();
+        
         System.out.println("Enter the serial number:");
         serialNumber = input.nextLine();
+        
         System.out.println("Enter the value in dollars (whole number):");
         value = input.nextInt();
         input.nextLine();
+        
         Item item = new Item(name, serialNumber, value);
         inventory.addItem(item);
       } else if (userInput == 2) { // Delete item
         System.out.println("Enter the serial number of the item to delete:");
         serialNumber = input.nextLine();
+        
         inventory.removeItem(inventory.getItem(serialNumber));
       } else if (userInput == 3) { // Modiy item
         System.out.println("Enter the serial number of the item to change:");
         serialNumber = input.nextLine();
+        
         System.out.println("Enter the new name:");
         name = input.nextLine();
+        
         System.out.println("Enter the new value in dollars (whole number):");
         value = input.nextInt();
+        
         Item item = inventory.getItem(serialNumber);
         item.modifyItem(name, serialNumber, value);
       } else if (userInput == 4) {
