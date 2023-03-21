@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.NoSuchElementException;
 
 class Main {
   public static void printMenu() {
@@ -10,6 +9,7 @@ class Main {
     System.out.println("Press 4 to show all the items.");
     System.out.println("Press 5 to quit the program.");
   }
+
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
     Inventory inventory = new Inventory();
@@ -45,7 +45,14 @@ class Main {
         value = input.nextInt();
         Item item = inventory.getItem(serialNumber);
         item.modifyItem(name, serialNumber, value);
+      } else if (userInput == 4) {
+        inventory.printInventory();
+      } else {
+        break;
       }
+      printMenu();
+      userInput = input.nextInt();
+      input.nextLine();
     }
     input.close();
   }
@@ -53,23 +60,28 @@ class Main {
 
 class Inventory {
   public ArrayList<Item> inventory;
+
   public Inventory() {
     inventory = new ArrayList<>();
   }
+
   public void addItem(Item item) {
     inventory.add(item);
   }
+
   public void removeItem(Item item) {
     inventory.remove(item);
   }
+
   public Item getItem(String serialNumber) {
-    for (Item item: inventory) {
-      if (item.getSerialNumber().equals(serialNumber)) return item;
+    for (Item item : inventory) {
+      if (item.getSerialNumber().equals(serialNumber))
+        return item;
     }
-    throw new NoSuchElementException();
   }
+
   public void printInventory() {
-    for (Item item: inventory) {
+    for (Item item : inventory) {
       System.out.println(item.toString());
     }
   }
@@ -85,14 +97,17 @@ class Item {
     this.serialNumber = serialNumber;
     this.value = value;
   }
+
   public void modifyItem(String name, String serialNumber, int value) {
     this.name = name;
     this.serialNumber = serialNumber;
     this.value = value;
   }
+
   public String toString() {
     return String.format("%s,%s,%d", name, serialNumber, value);
   }
+
   public String getSerialNumber() {
     return this.serialNumber;
   }
