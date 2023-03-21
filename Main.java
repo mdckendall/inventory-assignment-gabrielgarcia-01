@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.NoSuchElementException;
 
 class Main {
   public static void printMenu() {
@@ -78,6 +79,7 @@ class Inventory {
       if (item.getSerialNumber().equals(serialNumber))
         return item;
     }
+    throw new NoSuchElementException();
   }
 
   public void printInventory() {
